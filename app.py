@@ -6,7 +6,6 @@ st.set_page_config(page_title="HRMS Incident Analyzer", page_icon="🏥", layout
 st.title("🏥 HRMS Incident Analyzer")
 st.subheader("ระบบ 'ช่วย' วิเคราะห์อุบัติการณ์ความเสี่ยง HRMS on Cloud")
 st.markdown("💡 *ระบบนี้เชื่อมต่อฐานข้อมูลเกณฑ์ความเสี่ยง NRLS & HRMS ประจำปี 2565*")
-st.markdown("(จัดทำโดย แผนกวิสัญญีวิทยา รพ.เมตตาประชารักษ์ (วัดไร่ขิง))")
 
 # 1. Read API key from Streamlit Secrets first
 api_key = st.secrets.get("GROQ_API_KEY", "")
@@ -285,4 +284,5 @@ if st.button("🔍 วิเคราะห์ความเสี่ยง", t
 
 st.divider() # ขีดเส้นแบ่งให้ดูเป็นระเบียบ (ใส่หรือไม่ใส่ก็ได้)
 # Ending
+st.markdown("(จัดทำโดย แผนกวิสัญญีวิทยา รพ.เมตตาประชารักษ์ (วัดไร่ขิง), กรมการแพทย์. ประเทศไทย)")
 st.markdown("Department of Anesthesia, Mettapracharak (Wat Raikhing) Hospital. Thailand")
