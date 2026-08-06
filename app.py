@@ -4,7 +4,8 @@ from groq import Groq
 st.set_page_config(page_title="HRMS Incident Analyzer", page_icon="🏥", layout="wide")
 
 st.title("🏥 HRMS Incident Analyzer")
-st.subheader("ระบบวิเคราะห์อุบัติการณ์ความเสี่ยง HRMS on Cloud (โรงพยาบาลสุรินทร์)")
+st.subheader("ระบบ 'ช่วย' วิเคราะห์อุบัติการณ์ความเสี่ยง HRMS on Cloud (จัดทำโดย แผนกวิสัญญีวิทยา รพ.เมตตาประชารักษ์ (วัดไร่ขิง))")
+st.markdown("💡 *ระบบนี้เชื่อมต่อฐานข้อมูลเกณฑ์ความเสี่ยง NRLS & HRMS ประจำปี 2565*")
 
 # 1. Read API key from Streamlit Secrets first
 api_key = st.secrets.get("GROQ_API_KEY", "")
@@ -247,6 +248,14 @@ incident_text = st.text_area(
     placeholder="ระบุรายละเอียดเหตุการณ์ที่เกิดขึ้นในระบบ HRMS..."
 )
 
+# --- ข้อความคำเตือนก่อนกดปุ่ม ---
+st.warning(
+    "⚠️ **คำชี้แจง:** เครื่องมือ HRMS Incident Analyzer เป็นเพียงเครื่อง 'ช่วย' แนะนำการแยกประเภท "
+    "และ ระดับความรุนแรงของความเสี่ยงเท่านั้น และเครื่องมือสามารถผิดพลาดได้ ควรตรวจทานผลการแนะนำ 'ทุกครั้ง'"
+    "HRMS Incident Analyzer is an AI assisted tool and can make mistakes."
+)
+
+# ปุ่มกดวิเคราะห์ความเสี่ยง
 if st.button("🔍 วิเคราะห์ความเสี่ยง", type="primary"):
     if not api_key:
         st.error("กรุณากรอก Groq API Key ที่แถบด้านข้างก่อนครับ")
@@ -272,3 +281,7 @@ if st.button("🔍 วิเคราะห์ความเสี่ยง", t
                 
         except Exception as e:
             st.error(f"เกิดข้อผิดพลาดในการเชื่อมต่อ: {e}")
+
+st.divider() # ขีดเส้นแบ่งให้ดูเป็นระเบียบ (ใส่หรือไม่ใส่ก็ได้)
+# Ending
+st.markdown("Department of Anesthesia, Mettapracharak (Wat Raikhing) Hospital")
