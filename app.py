@@ -284,4 +284,4 @@ if st.button("🔍 วิเคราะห์ความเสี่ยง", t
 
 st.divider() # ขีดเส้นแบ่งให้ดูเป็นระเบียบ (ใส่หรือไม่ใส่ก็ได้)
 # Ending
-st.markdown("Department of Anesthesia, Mettapracharak (Wat Raikhing) Hospital")
+st.markdown("Department of Anesthesia, Mettapracharak (Wat Raikhing) Hospital. Thailand")
