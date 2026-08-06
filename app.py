@@ -1,17 +1,24 @@
 import streamlit as st
 from groq import Groq
 
-st.set_page_config(page_title="HRMS Incident Analyzer (Groq)", page_icon="🏥", layout="wide")
+st.set_page_config(page_title="HRMS Incident Analyzer", page_icon="🏥", layout="wide")
 
 st.title("🏥 HRMS Incident Analyzer")
 st.subheader("ระบบวิเคราะห์อุบัติการณ์ความเสี่ยง HRMS on Cloud (โรงพยาบาลสุรินทร์)")
 
-# Sidebar Configuration
+# 1. Read API key from Streamlit Secrets first
+api_key = st.secrets.get("GROQ_API_KEY", "")
+
+# 2. Sidebar Configuration
 with st.sidebar:
     st.header("⚙️ การตั้งค่า Groq")
-    api_key = st.text_input("กรอก Groq API Key:", type="password")
     
-    # Selected high-performance free models on Groq
+    # If API key is not found in Secrets, fallback to text input
+    if not api_key:
+        api_key = st.text_input("กรอก Groq API Key:", type="password")
+    else:
+        st.success("🟢 ฝัง Groq API Key เรียบร้อยแล้ว")
+    
     model_name = st.selectbox(
         "เลือกโมเดล AI:",
         [
@@ -247,10 +254,9 @@ if st.button("🔍 วิเคราะห์ความเสี่ยง", t
         st.warning("กรุณากรอกรายละเอียดเหตุการณ์ความเสี่ยง")
     else:
         try:
-            with st.spinner("กำลังวิเคราะห์ข้อมูลผ่าน Groq (ความเร็วสูง)..."):
+            with st.spinner("กำลังวิเคราะห์ข้อมูล..."):
                 client = Groq(api_key=api_key)
 
-                # Send request using Chat Completions API
                 chat_completion = client.chat.completions.create(
                     messages=[
                         {"role": "system", "content": system_instruction},
